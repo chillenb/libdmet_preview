@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "libdmet"
+version = "0.0.1"
+authors = [
+  { name="Zhihao Cui" }
+]
+description = "A library of density matrix embedding theory (DMET) for lattice models and realistic solids."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+  'pyscf >= 2.0',
+]
+
+[project.urls]
+"Homepage" = "https://github.com/gkclab/libdmet_preview"
+"Bug Tracker" = "https://github.com/gkclab/libdmet_preview/issues"
+
