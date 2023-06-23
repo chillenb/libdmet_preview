@@ -24,16 +24,14 @@ import matplotlib
 from matplotlib import pyplot as plt
 from matplotlib.pyplot import Normalize
 from matplotlib.collections import LineCollection
-matplotlib.rcParams['mathtext.fontset'] = 'stix'
-matplotlib.rcParams['font.family'] = 'STIXGeneral'
-# set font to 42 for Type2 fonts:
-#matplotlib.rcParams['pdf.fonttype'] = 42
-#matplotlib.rcParams['ps.fonttype'] = 42
+
+from libdmet.utils.plot_wrapper import plot_stixfont
 
 # ****************************************************************************
 # plot curve
 # ****************************************************************************
 
+@plot_stixfont
 def plot_smooth(x, y, x_plot=None, label=None, color='black', marker='o', \
         linestyle='-', smooth=1e-4, remove_neg=False, n0left=None, \
         n0right=None, do_plot=True, **kwargs):
@@ -841,6 +839,7 @@ def get_dos(mo_energy, ndos=301, e_min=None, e_max=None, e_fermi=None, \
                             e_curr)**2) / tsigma), axis=(1, 2))
     return elist, dos / (nkpts * norm)
 
+@plot_stixfont
 def plot_dos(elist, pdos, idx_dic=None, color_dic=None, \
         fig_size=(12, 6), fig_name="pdos.pdf", unit='eV', text=None, **kwargs):
     """
@@ -928,6 +927,7 @@ def plot_dos(elist, pdos, idx_dic=None, color_dic=None, \
     plt.savefig(fig_name, dpi=300, bbox_inches='tight')
     return plt
 
+@plot_stixfont
 def plot_bands(ax, kdis, ew, weights=None, cmap=None, linewidth=4, alpha=1.0):
     """
     Plot bands for given ax object.

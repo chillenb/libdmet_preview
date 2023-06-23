@@ -15,11 +15,7 @@ import scipy.linalg as la
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
 import matplotlib
-matplotlib.rcParams['mathtext.fontset'] = 'stix'
-matplotlib.rcParams['font.family'] = 'STIXGeneral'
-# set font to 42 for Type2 fonts:
-#matplotlib.rcParams['pdf.fonttype'] = 42
-#matplotlib.rcParams['ps.fonttype'] = 42
+from libdmet.utils.plot_wrapper import plot_stixfont
 
 COLORS = \
        {"red"   : "#E57B7B",
@@ -66,6 +62,7 @@ class LatticePlot(object):
             plt.tight_layout()
         plt.savefig(fname, dpi=dpi, *args)
     
+    @plot_stixfont
     def plot_lattice(self, figsize=(4.8, 4.8), **kwargs):
         """
         Create a canvas for the lattice.
@@ -119,6 +116,7 @@ class LatticePlot(object):
             ax.spines['top'].set_linewidth(framewidth)
             ax.spines['bottom'].set_linewidth(framewidth)
     
+    @plot_stixfont
     def plot_atom(self, coord, rad, color, edgecolors='black', \
             linewidth=None, **kwargs):
         """
@@ -136,6 +134,7 @@ class LatticePlot(object):
         plt.scatter(coord[0], coord[1], c=color, s=np.sqrt(1000 * rad) * 20, \
                 edgecolors=edgecolors, linewidths=linewidth, **kwargs)
     
+    @plot_stixfont
     def plot_spin(self, coord, m, factor=4.0, color='black', width=0.05, \
             head_width=0.16, head_length=0.13, **kwargs):
         """
@@ -157,6 +156,7 @@ class LatticePlot(object):
                 head_width=head_width, head_length=head_length, \
                 length_includes_head=False, color=color, **kwargs)
     
+    @plot_stixfont
     def plot_name(self, coord, name, fontsize=15, **kwargs):
         """
         Plot a name at coord.
@@ -166,6 +166,7 @@ class LatticePlot(object):
     
     plot_text = plot_name
 
+    @plot_stixfont
     def plot_p_orb(self, coord, direct='up', phase=["+", "-"], width=0.4, \
             height=0.2, fontsize={"+": 16, "-": 24}, \
             color={"+": COLORS["red"], "-": COLORS["blue"]}, **kwargs):
@@ -213,6 +214,7 @@ class LatticePlot(object):
         self.ax.add_patch(ellipse1)
         self.ax.add_patch(ellipse2)
 
+    @plot_stixfont
     def plot_d_orb(self, coord, direct='up', **kwargs):
         """
         Plot a d orbital at coord.
@@ -224,6 +226,7 @@ class LatticePlot(object):
             self.plot_p_orb(coord, direct='up', phase=["-", "-"])
             self.plot_p_orb(coord, direct='left', phase=["+", "+"])
     
+    @plot_stixfont
     def plot_bond(self, coord0, coord1, val, color_list=None, zorder=None, \
             transparent=True, **kwargs):
         """
@@ -254,6 +257,7 @@ class LatticePlot(object):
     """
     The following functions are for plotting a list of atoms, spins, pairings.
     """
+    @plot_stixfont
     def plot_atoms(self, rad_list, color_dic, coords=None, names=None, \
             **kwargs):
         """
@@ -282,6 +286,7 @@ class LatticePlot(object):
         for i, name in enumerate(names):
             self.plot_atom(coords[i], rad_list[i], color_dic[name], **kwargs)
     
+    @plot_stixfont
     def plot_spins(self, m_list, coords=None, **kwargs):
         """
         Plot all spins in the lattice.
@@ -297,6 +302,7 @@ class LatticePlot(object):
         for i in range(len(m_list)):
             self.plot_spin(coords[i], m_list[i], **kwargs)
     
+    @plot_stixfont
     def plot_pairings(self, pair_dic, bond_max=np.inf, bond_min=0.0, \
             cross_boundary=True, cross_box=False, **kwargs):
         """
@@ -349,6 +355,7 @@ class LatticePlot(object):
                                (la.norm(coord1p - coord0) >= bond_min):
                                 self.plot_bond(coord0, coord1p, val, **kwargs)
 
+@plot_stixfont
 def plot_3band_order(res, pairing="Cu-Cu", transparent=True, **kwargs):
     """
     Plot order parameter of the 3band model in a 2x2 cluster.
