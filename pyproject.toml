@@ -23,3 +23,6 @@ dependencies = [
 "Homepage" = "https://github.com/gkclab/libdmet_preview"
 "Bug Tracker" = "https://github.com/gkclab/libdmet_preview/issues"
 
+[tool.hatch.build.targets.wheel]
+only-include = ["src"]
+sources = ["src"]
